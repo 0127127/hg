@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>체험학습 사전 안내 웹사이트</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background: #f4f6f8;
+}
+
+header {
+  background: #1f2937;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+section { display: none; }
+
+/* 메인 */
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.main-btn {
+  width: 90%;
+  max-width: 400px;
+  height: 90px;
+  font-size: 18px;
+  margin: 15px 0;
+  background: #374151;
+  color: white;
+  border: none;
+}
+
+/* 상단 */
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* 탭 */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: #e5e7eb;
+}
+
+.tab-btn.active {
+  background: #374151;
+  color: white;
+}
+
+/* 콘텐츠 */
+.content-box {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+/* 관 버튼 */
+.accordion {
+  background: #e5e7eb;
+  padding: 12px;
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.accordion span {
+  font-weight: bold;
+}
+
+/* 유물 슬라이드 */
+.slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.slide {
+  min-width: 100%;
+  scroll-snap-align: start;
+  padding: 15px;
+}
+
+.slide img {
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+/* 점 표시 */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background: #cbd5e1;
+  border-radius: 50%;
+}
+
+.dots span.active {
+  background: #374151;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>체험학습 사전 안내</h1>
+</header>
+
+<main>
+
+<!-- 메인 -->
+<section id="home">
+  <button class="main-btn" onclick="openMuseum()">국립중앙박물관</button>
+  <button class="main-btn" onclick="openScience()">국립과천과학관</button>
+</section>
+
+<!-- ================= 박물관 ================= -->
+<section id="museum">
+  <button class="back-btn" onclick="showSection('home')">←</button>
+  <h2>국립중앙박물관</h2>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="museumTab('exhibit', this)">주요 전시 정보</button>
+    <button class="tab-btn" onclick="museumTab('overview', this)">기관 개요</button>
+    <button class="tab-btn" onclick="museumTab('guide', this)">관람 안내</button>
+  </div>
+
+  <div class="content-box museum exhibit">
+    <div class="accordion" onclick="toggleAccordion(this, 'm1')">
+      <span>선사·고대관</span><span>▶</span>
+    </div>
+    <div id="m1" style="display:none">
+      <div class="slider">
+        <div class="slide">
+          <strong>빗살무늬 토기</strong>
+          <p>신석기 시대 토기</p>
+        </div>
+        <div class="slide">
+          <strong>돌도끼</strong>
+          <p>생활 도구</p>
+        </div>
+      </div>
+      <div class="dots"><span class="active"></span><span></span></div>
+    </div>
+
+    <div class="accordion" onclick="toggleAccordion(this, 'm2')">
+      <span>특별 전시</span><span>▶</span>
+    </div>
+    <div id="m2" style="display:none">
+      <p><strong>왕실의 일상</strong><br>조선 왕실 문화</p>
+    </div>
+  </div>
+
+  <div class="content-box museum overview" style="display:none">
+    <p>대한민국 대표 국립 박물관</p>
+    <p><strong>위치:</strong> 서울 용산구 서빙고로 137</p>
+  </div>
+
+  <div class="content-box museum guide" style="display:none">
+    <ul>
+      <li>플래시 촬영 금지</li>
+      <li>전시실 내 음식물 반입 금지</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 과학관 ================= -->
+<section id="science">
+  <button class="back-btn" onclick="showSection('home')">←</button>
+  <h2>국립과천과학관</h2>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="scienceTab('exhibit', this)">주요 전시 정보</button>
+    <button class="tab-btn" onclick="scienceTab('overview', this)">기관 개요</button>
+    <button class="tab-btn" onclick="scienceTab('guide', this)">관람 안내</button>
+  </div>
+
+  <div class="content-box science exhibit">
+    <div class="accordion" onclick="toggleAccordion(this, 's1')">
+      <span>자연사관</span><span>▶</span>
+    </div>
+    <div id="s1" style="display:none">
+      <div class="slider">
+        <div class="slide">
+          <strong>공룡 화석</strong>
+          <p>중생대 생물</p>
+        </div>
+        <div class="slide">
+          <strong>매머드</strong>
+          <p>빙하기 포유류</p>
+        </div>
+      </div>
+      <div class="dots"><span class="active"></span><span></span></div>
+    </div>
+  </div>
+
+  <div class="content-box science overview" style="display:none">
+    <p>체험 중심 과학관</p>
+    <p><strong>위치:</strong> 경기 과천시 상하벌로 110</p>
+  </div>
+
+  <div class="content-box science guide" style="display:none">
+    <ul>
+      <li>체험물 안전 수칙 준수</li>
+      <li>안내 직원 지시 따르기</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll("section").forEach(s => s.style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+function openMuseum(){ showSection("museum"); }
+function openScience(){ showSection("science"); }
+
+function museumTab(type, btn){
+  document.querySelectorAll(".museum").forEach(c=>c.style.display="none");
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelector(".museum."+type).style.display="block";
+  btn.classList.add("active");
+}
+
+function scienceTab(type, btn){
+  document.querySelectorAll(".science").forEach(c=>c.style.display="none");
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelector(".science."+type).style.display="block";
+  btn.classList.add("active");
+}
+
+function toggleAccordion(btn, id){
+  const target = document.getElementById(id);
+  const arrow = btn.querySelectorAll("span")[1];
+  if(target.style.display==="block"){
+    target.style.display="none";
+    arrow.textContent="▶";
+  } else {
+    target.style.display="block";
+    arrow.textContent="▼";
+  }
+}
+
+showSection("home");
+</script>
+
+</body>
+</html>
